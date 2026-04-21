@@ -20,6 +20,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth; /* Desplazamiento suave al pulsar el botón */
         }
 
         /* ENCABEZADO */
@@ -66,6 +67,40 @@
             color: var(--mcl-green); 
         }
 
+        /* --- BOTÓN FLOTANTE LLAMATIVO --- */
+        .btn-flotante {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--mcl-green);
+            color: var(--mcl-blue);
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: pulse-green 2s infinite;
+            border: 2px solid white;
+            text-transform: uppercase;
+        }
+
+        .btn-flotante:hover {
+            transform: scale(1.1);
+            background-color: var(--mcl-blue);
+            color: white;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(166, 206, 57, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(166, 206, 57, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(166, 206, 57, 0); }
+        }
+
         /* CONTENEDORES */
         .container { 
             padding: 15px; 
@@ -74,12 +109,22 @@
             margin: auto; 
         }
 
-        /* ESTILOS CONTACTOS (IZQUIERDA) */
+        /* ESTILOS CONTACTOS (AL FINAL) */
         .contact-sidebar {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-bottom: 20px;
+            margin: 50px auto 30px;
+            max-width: 1200px;
+            padding: 25px 15px;
+            background: #eef2f5;
+            border-radius: 15px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
         }
 
         .contact-card {
@@ -116,28 +161,8 @@
             transition: transform 0.2s;
         }
 
-        .btn-action:hover { transform: scale(1.1); }
-        
-        .btn-action img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; 
-        }
-
-        /* AJUSTE DE DISEÑO PARA PANTALLAS GRANDES */
-        @media (min-width: 992px) {
-            .container {
-                display: grid;
-                grid-template-columns: 200px 1fr;
-                gap: 30px;
-                align-items: start;
-            }
-            .contact-sidebar {
-                position: sticky;
-                top: 175px;
-            }
-            .section { grid-column: 2; }
-        }
+        .btn-action:hover { transform: scale(1.2); }
+        .btn-action img { width: 100%; height: 100%; object-fit: contain; }
 
         .section { display: none; width: 100%; }
         .section.active { display: block; }
@@ -209,6 +234,12 @@
 </head>
 <body>
 
+<!-- BOTÓN FLOTANTE LLAMATIVO -->
+<a href="#contacto-seccion" class="btn-flotante">
+    <img src="whatsapp.png" style="width: 20px;" alt=""> 
+    CONTÁCTANOS
+</a>
+
 <header>
     <div class="logo-mcl">
         <img src="MC LOGO.png" alt="Logo MCL"> 
@@ -226,10 +257,45 @@
 
 <div class="container">
     
-    <!-- COLUMNA IZQUIERDA: CONTACTOS -->
-    <aside class="contact-sidebar">
-        <h4 style="color: var(--mcl-blue); margin: 0 0 5px 0; font-size: 12px;">CONTACTOS</h4>
+    <!-- PESTAÑA 1: POLÍTICA -->
+    <div id="p" class="section active">
+        <h3 style="color: var(--mcl-blue); margin-top:0;">Política de Cambios y Devoluciones</h3>
+        <a href="Politica de Cambios y Devoluciones_clientes.pdf" target="_blank" class="btn-fullscreen">Ver Pantalla Completa ↗</a>
+        <div class="pdf-wrapper">
+            <iframe src="Politica de Cambios y Devoluciones_clientes.pdf"></iframe>
+        </div>
+    </div>
+
+    <!-- PESTAÑA 2: DOCUMENTACIÓN TÉCNICA -->
+    <div id="f" class="section">
+        <h3 style="color: var(--mcl-blue); margin-top:0;">Documentación Técnica NANOtij</h3>
         
+        <!-- Botones de selección -->
+        <div class="selector-fichas">
+            <button class="btn-ficha active" onclick="verPdf('NANOtij.pdf', this)">
+                FICHA TÉCNICA
+                <span>(Porous TDS)</span>
+            </button>
+            <button class="btn-ficha" onclick="verPdf('NANOtij-Black-Ink-SDS-V.02-17102024.pdf', this)">
+                HOJA DE SEGURIDAD
+                <span>(Black Ink SDS)</span>
+            </button>
+        </div>
+
+        <a id="btnFullFicha" href="NANOtij.pdf" target="_blank" class="btn-fullscreen">Ver Pantalla Completa ↗</a>
+        
+        <div class="pdf-wrapper">
+            <iframe id="visorFichas" src="NANOtij.pdf"></iframe>
+        </div>
+    </div>
+
+</div>
+
+<!-- SECCIÓN DE CONTACTOS AL FINAL -->
+<aside class="contact-sidebar" id="contacto-seccion">
+    <h4 style="color: var(--mcl-blue); margin: 0 0 20px 0; font-size: 16px; text-align: center; font-weight: 900;">¿NECESITAS AYUDA? CONTACTA CON NUESTRO EQUIPO</h4>
+    
+    <div class="contact-grid">
         <div class="contact-card">
             <span class="contact-title">Soporte Tecnico</span>
             <div class="contact-name">Paola Orellana</div>
@@ -268,41 +334,8 @@
                 </a>
             </div>
         </div>
-    </aside>
-
-    <!-- PESTAÑA 1: POLÍTICA -->
-    <div id="p" class="section active">
-        <h3 style="color: var(--mcl-blue); margin-top:0;">Política de Cambios y Devoluciones</h3>
-        <a href="Politica de Cambios y Devoluciones_clientes.pdf" target="_blank" class="btn-fullscreen">Ver Pantalla Completa ↗</a>
-        <div class="pdf-wrapper">
-            <iframe src="Politica de Cambios y Devoluciones_clientes.pdf"></iframe>
-        </div>
     </div>
-
-    <!-- PESTAÑA 2: DOCUMENTACIÓN TÉCNICA -->
-    <div id="f" class="section">
-        <h3 style="color: var(--mcl-blue); margin-top:0;">Documentación Técnica NANOtij</h3>
-        
-        <!-- Botones de selección -->
-        <div class="selector-fichas">
-            <button class="btn-ficha active" onclick="verPdf('NANOtij.pdf', this)">
-                FICHA TÉCNICA
-                <span>(Porous TDS)</span>
-            </button>
-            <button class="btn-ficha" onclick="verPdf('NANOtij-Black-Ink-SDS-V.02-17102024.pdf', this)">
-                HOJA DE SEGURIDAD
-                <span>(Black Ink SDS)</span>
-            </button>
-        </div>
-
-        <a id="btnFullFicha" href="NANOtij.pdf" target="_blank" class="btn-fullscreen">Ver Pantalla Completa ↗</a>
-        
-        <div class="pdf-wrapper">
-            <iframe id="visorFichas" src="NANOtij.pdf"></iframe>
-        </div>
-    </div>
-
-</div>
+</aside>
 
 <script>
     function tab(id, btn) {
