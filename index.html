@@ -9,6 +9,7 @@
             --mcl-blue: #004b8d; 
             --mcl-green: #a6ce39; 
             --bg-light: #f4f7f9;
+            --whatsapp-color: #25d366;
         }
 
         html, body {
@@ -69,7 +70,7 @@
         .container { 
             padding: 15px; 
             box-sizing: border-box; 
-            max-width: 1200px; /* Aumentado para dar espacio al lateral */
+            max-width: 1200px; 
             margin: auto; 
         }
 
@@ -88,7 +89,6 @@
             border-left: 6px solid var(--mcl-green);
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             border: 1px solid #e0e0e0;
-            border-left: 6px solid var(--mcl-green);
         }
 
         .contact-title {
@@ -100,17 +100,30 @@
             display: block;
         }
 
-        .contact-name { font-weight: 800; color: var(--mcl-blue); font-size: 15px; }
-        .contact-area { font-size: 12px; color: #444; margin: 2px 0 8px 0; font-style: italic; }
-        .contact-phone { 
-            font-weight: bold; 
-            color: var(--mcl-blue); 
-            background: #f0f4f8;
-            padding: 5px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            font-size: 14px;
+        .contact-name { font-weight: 800; color: var(--mcl-blue); font-size: 15px; margin-bottom: 10px; }
+        
+        .contact-actions {
+            display: flex;
+            gap: 8px;
         }
+
+        .btn-action {
+            flex: 1;
+            text-decoration: none;
+            text-align: center;
+            padding: 8px 5px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .btn-whatsapp { background-color: var(--whatsapp-color); }
+        .btn-call { background-color: var(--mcl-blue); }
 
         /* AJUSTE DE DISEÑO PARA PANTALLAS GRANDES */
         @media (min-width: 992px) {
@@ -220,23 +233,29 @@
         
         <div class="contact-card">
             <span class="contact-title">Soporte Técnico</span>
-            <div class="contact-name">Paola Orellana</div>
-            <div class="contact-area">WhatsApp</div>
-            <div class="contact-phone">📞 +503 7915 7707</div>
+            <div class="contact-name">Contacto 1</div>
+            <div class="contact-actions">
+                <a href="https://wa.me/5210000000000" class="btn-action btn-whatsapp">WhatsApp</a>
+                <a href="tel:+5210000000000" class="btn-action btn-call">Llamar</a>
+            </div>
         </div>
 
         <div class="contact-card">
             <span class="contact-title">Atención al Cliente</span>
-            <div class="contact-name">Nombre de Contacto 2</div>
-            <div class="contact-area">Área o Departamento</div>
-            <div class="contact-phone">📞 +00 000 000 0000</div>
+            <div class="contact-name">Contacto 2</div>
+            <div class="contact-actions">
+                <a href="https://wa.me/5210000000000" class="btn-action btn-whatsapp">WhatsApp</a>
+                <a href="tel:+5210000000000" class="btn-action btn-call">Llamar</a>
+            </div>
         </div>
 
         <div class="contact-card">
             <span class="contact-title">Garantías</span>
-            <div class="contact-name">Nombre de Contacto 3</div>
-            <div class="contact-area">Área o Departamento</div>
-            <div class="contact-phone">📞 +00 000 000 0000</div>
+            <div class="contact-name">Contacto 3</div>
+            <div class="contact-actions">
+                <a href="https://wa.me/5210000000000" class="btn-action btn-whatsapp">WhatsApp</a>
+                <a href="tel:+5210000000000" class="btn-action btn-call">Llamar</a>
+            </div>
         </div>
     </aside>
 
